@@ -14,11 +14,12 @@ def plotSpectru(y,Fs):
     frq = k/T # two sides frequency range
     frq = frq[range(n/2)] # one side frequency range
 
-    Y = fft(y)/n # fft computing and normalization
-    Y = Y[range(n/2)]
+    Y = fft(y, 32) # fft computing and normalization
+    # Y = Y[range(n/2)]
     
     print Y
     print len(Y)
+    print Y[0]
     # plot(frq,abs(Y),'r') # plotting the spectrum
     # xlabel('Freq (Hz)')
     # ylabel('|Y(freq)|')
@@ -27,27 +28,29 @@ def show_info(aname, a):
     print "Array", aname
     print "shape:", a.shape
     print "dtype:", a.dtype
-    print "min, max:", a.min(), a.max()
-    print
+    print "min, max:", a.min(), a.max()    
 
 def main():
     print 'analyzer start'
     filename = 'abc.mp3'
 
     sound = AudioSegment.from_mp3(filename)
+    sound.set_channels(1)
     sound.export('abc.wav', format='wav')
 
     Fs = 44100;  # sampling rate
 
     rate,data=read('abc.wav')
+    show_info('data', data)
     y=data[:,1]
     lungime=len(y)
     timp=len(y)/44100.
     t=linspace(0,timp,len(y))
     
-    print rate
+    print 'rate: ', rate
+    print 'data: ', data
 
-    print data
+    print 'song length: ', len(data)/rate, 'seconds'
     print len(data)
 
     plotSpectru(y, Fs)
