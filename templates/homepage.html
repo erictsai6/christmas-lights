@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Christmas Lights</title>   
+        <link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/dist/css/bootstrap.min.css">
+        <script src="/static/vendor/fetch/fetch.js"></script>
+        <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="/static/app/homepage.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div>Upload that music file bruh</div>
+                    <!--<form method="POST" action="/upload" enctype="multipart/form-data">-->
+                    <form onsubmit="submitFile(); return false;">
+                        <input type="file" name="audio" accept="audio/*">
+                        <input type="submit">
+                    </form>
+                </div>
+            </div>
+        </div>        
+    </body>
+</html>
