@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory, jsonify
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_folder='static')
@@ -29,9 +29,15 @@ def upload():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return {'state': 'SUCCESS'}
+            success_response = {'state': 'SUCCESS'}
+            resp = jsonify(**success_response)
+            resp.status_code = 200  
+            return resp
         else:
-            return {'state': 'INVALID', 'error': 'Invalid filetype'}, 400
+            error_response = {'state': 'INVALID', 'error': 'Invalid filetype'}
+            resp = jsonify(**error_response)
+            resp.status_code = 400
+            return resp
 
 if __name__ == '__main__':
     app.run(debug= True)

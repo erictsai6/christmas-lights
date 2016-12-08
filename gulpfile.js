@@ -1,0 +1,53 @@
+// Include gulp
+var gulp = require('gulp');
+
+// Include Our Plugins
+var jshint = require('gulp-jshint');
+var sass = require('gulp-sass');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+var shell = require('gulp-shell')
+
+// Lint Task
+gulp.task('lint', function() {
+    return gulp.src('static/app/**/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
+});
+
+// Compile Our Sass
+gulp.task('sass', function() {
+    return gulp.src('static/scss/**/*.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('dist/css'));
+});
+
+// Concatenate & Minify JS
+gulp.task('scripts', function() {
+    return gulp.src('static/app/**/*.js')
+        .pipe(concat('all.js'))
+        .pipe(gulp.dest('dist'))
+        .pipe(rename('all.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('server', shell.task([
+  'python server.py'
+]));
+
+gulp.task('redis-server', shell.task([
+    'redis-3.2.6/src/redis-server'
+]))
+
+// Watch Files For Changes
+gulp.task('watch', function() {
+    gulp.watch('static/app/**/*.js', ['lint', 'scripts']);
+    gulp.watch('server.py', ['server']);
+    gulp.watch('server/**/*.py', ['server']);
+    gulp.watch('static/scss/**/*.scss', ['sass']);
+});
+
+// Default Task
+gulp.task('default', ['lint', 'sass', 'scripts', 'server', 'redis-server', 'watch']);

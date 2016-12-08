@@ -1,0 +1,35 @@
+{
+  "name": "christmas-lights",
+  "version": "1.0.0",
+  "description": "christmas lights web application",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erictsai6/christmas-lights.git"
+  },
+  "keywords": [
+    "christmas",
+    "lights",
+    "raspberry",
+    "pi"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erictsai6/christmas-lights/issues"
+  },
+  "homepage": "https://github.com/erictsai6/christmas-lights#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-shell": "^0.5.2",
+    "gulp-uglify": "^2.0.0",
+    "jshint": "^2.9.4"
+  }
+}

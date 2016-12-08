@@ -1,10 +1,16 @@
 *.mp3
+*.wav
 
 *.pyc
 
 *.log
 
+dist/
+
 venv/
 bower_components/
+node_modules/
+
 static/vendor/
 
+redis-3.*

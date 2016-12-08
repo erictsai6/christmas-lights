@@ -7,14 +7,27 @@
         <script src="/static/app/homepage.js"></script>
     </head>
     <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Christmas Lights</a>
+                </div>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
-                    <div>Upload that music file bruh</div>
+                    <div>Upload your music</div>
                     <!--<form method="POST" action="/upload" enctype="multipart/form-data">-->
                     <form onsubmit="submitFile(); return false;">
-                        <input type="file" name="audio" accept="audio/*">
-                        <input type="submit">
+                        <div class="input-group">
+                            <input type="file" class="form-control" name="audio" accept="audio/*">
+                        </div>
+                        <div class="input-group">
+                            <input class="btn btn-primary" type="submit">
+                        </div>
                     </form>
                 </div>
             </div>
