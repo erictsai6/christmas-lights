@@ -4,8 +4,8 @@ from scipy.io.wavfile import read, write
 
 def fft_analyze(data, sample_rate):
     
-    # Break into subarrays of 500 ms each
-    subarrays = array_split(data, sample_rate / 2)
+    # Break into subarrays of 250 ms each
+    subarrays = array_split(data, sample_rate / 4)
 
     ffts = []
     number_of_blocks = 32
@@ -20,10 +20,12 @@ def fft_analyze(data, sample_rate):
         # frq = k / T        
 
         fft_subarray = abs(fft(subarray, number_of_blocks)[: 32 / 2])
+        print max(fft_subarray)
         ffts.append(fft_subarray)
 
+        
     # TODO - not really relevant but i just wanted to keep this here for my benefit
-    x_frequencies = linspace(0, sample_rate / 2, number_of_blocks)
+    x_frequencies = linspace(0, sample_rate / 4, number_of_blocks)
 
     # Returns array of FFTs where each tick represents 500 ms
     return ffts

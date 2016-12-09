@@ -44,7 +44,7 @@ def main():
 
     Fs = 44100;  # sampling rate
 
-    rate, data=read('abc.wav')
+    rate, data = read('abc.wav')
     data = data[:,1]
     ffts = fft_analyze(data, rate)
 

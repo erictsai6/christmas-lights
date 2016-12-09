@@ -6,7 +6,7 @@
         var data = new FormData()
         data.append('audio', input.files[0])
 
-        fetch('/upload', {
+        fetch('/api/upload', {
             method: 'POST',
             body: data       
         })

@@ -14,3 +14,4 @@ node_modules/
 static/vendor/
 
 redis-3.*
+*.rdb

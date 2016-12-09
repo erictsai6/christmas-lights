@@ -1,15 +1,16 @@
 from pydub import AudioSegment
 import re
+import os 
 
-def convert_mp3_to_wav(filename):
-    if filename is None:
+def convert_mp3_to_wav(full_filepath):
+    if full_filepath is None:
         return
     
-    wav_filename = re.sub(r'\.mp3$', '.wav', filename)
+    full_wav_filepath = re.sub(r'\.mp3$', '.wav', full_filepath)
 
-    sound = AudioSegment.from_mp3(filename)    
+    sound = AudioSegment.from_mp3(full_filepath)    
     sound.set_channels(1)
-    sound.export(wav_filename, format='wav')
+    sound.export(full_wav_filepath, format='wav')
 
-    return wav_filename
+    return full_wav_filepath
 

@@ -7,5 +7,8 @@ Python script to control raspberry pi device and christmas lights
 * cd redis-3.2.6
 * make
 
+
+brew install ffmpeg
+
 ## Gulp
 * gulp
