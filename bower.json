@@ -1,0 +1,29 @@
+{
+  "name": "christmas-lights",
+  "description": "christmas lights web application",
+  "main": "gulpfile.js",
+  "authors": [
+    "Eric Tsai <etsai@grubhub.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "christmas",
+    "lights",
+    "raspberry",
+    "pi"
+  ],
+  "homepage": "https://github.com/erictsai6/christmas-lights",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.7",
+    "fetch": "^2.0.1",
+    "react": "^15.4.1"
+  }
+}
