@@ -16,7 +16,7 @@ class Queue extends React.Component {
         this.retrieveMusicQueue();
         this.polling = setInterval(() => {
             this.retrieveMusicQueue();
-        }, 5000);
+        }, 10000);
     }
 
     componentWillUnmount() {
@@ -24,7 +24,10 @@ class Queue extends React.Component {
     }
 
     retrieveMusicQueue() {
-        fetch('/api/songs')
+        fetch('/api/songs', {
+                method: 'GET',
+                timeout: 5000
+            })
             .then((r) => {
                 return r.json();
             })

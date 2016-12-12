@@ -78,7 +78,8 @@ class Uploader extends React.Component {
 
         fetch('/api/upload', {
                 method: 'POST',
-                body: data       
+                body: data,
+                timeout: 30000       
             })
             .then((r) => {
                 return r.json();  

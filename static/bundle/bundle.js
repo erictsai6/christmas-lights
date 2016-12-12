@@ -22557,7 +22557,8 @@
 	
 	            fetch('/api/upload', {
 	                method: 'POST',
-	                body: data
+	                body: data,
+	                timeout: 30000
 	            }).then(function (r) {
 	                return r.json();
 	            }).then(function (response) {
@@ -22631,7 +22632,7 @@
 	            this.retrieveMusicQueue();
 	            this.polling = setInterval(function () {
 	                _this2.retrieveMusicQueue();
-	            }, 5000);
+	            }, 10000);
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
@@ -22643,7 +22644,10 @@
 	        value: function retrieveMusicQueue() {
 	            var _this3 = this;
 	
-	            fetch('/api/songs').then(function (r) {
+	            fetch('/api/songs', {
+	                method: 'GET',
+	                timeout: 5000
+	            }).then(function (r) {
 	                return r.json();
 	            }).then(function (response) {
 	                _this3.setState({
