@@ -58,7 +58,7 @@ try:
     GPIO.output(17, GPIO.HIGH)
 
 
-    time.sleep(60);
+    time.sleep(60)
     GPIO.cleanup()
     print "Good bye!"
 

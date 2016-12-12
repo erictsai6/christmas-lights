@@ -41,6 +41,7 @@ class Uploader extends React.Component {
                         <div className="form-group col-sm-4 col-sm-offset-4">                                                             
                             <button type="submit" 
                                 className="form-control btn btn-primary"
+                                disabled={this.state.isUploading}
                                 onClick={this.handleSubmit}>UPLOAD</button>                            
                         </div>
                         <div className="clearfix"></div>
@@ -66,6 +67,10 @@ class Uploader extends React.Component {
             return;
         }
 
+        this.setState({
+            isUploading: true
+        });
+
         var data = new FormData()
         data.append('audio', this.state.audioFile)
 
@@ -85,9 +90,11 @@ class Uploader extends React.Component {
                     
                 }
                 
-            }).catch(function(err) {
-                // Notify server error
-
+            })
+            .finally(function() {                
+                this.setState({
+                    isUploading: false
+                });
             })
     }
 }

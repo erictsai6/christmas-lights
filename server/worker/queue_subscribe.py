@@ -1,5 +1,6 @@
 import time
 import threading
+import pygame
 
 class QueueSubscribeWorker(threading.Thread):
     def __init__(self, x, redis_queue):
@@ -18,7 +19,14 @@ class QueueSubscribeWorker(threading.Thread):
                     
                     # Process the analyzer here 
                     print msg
-                    time.sleep(60)
+
+                    pygame.mixer.init()
+                    pygame.mixer.music.load(msg['filepath'])
+                    pygame.mixer.music.play()
+
+                    # Blocks music playback 
+                    while pygame.mixer.music.get_busy(): 
+                        pygame.time.Clock().tick(10)
 
                 time.sleep(5)
             except Exception, e:
