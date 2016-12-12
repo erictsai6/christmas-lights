@@ -1,6 +1,7 @@
 import time
 import threading
 import pygame
+import json
 
 class QueueSubscribeWorker(threading.Thread):
     def __init__(self, x, redis_queue):
@@ -13,23 +14,28 @@ class QueueSubscribeWorker(threading.Thread):
 
         while not self.kill_received:
             try:
-                msg = self.redis_queue.poll()
+                msg_list = self.redis_queue.get_list()
 
-                if msg is not None:
+                if msg_list is not None and len(msg_list) > 0:
                     
+                    msg = json.loads(msg_list[-1])
+
                     # Process the analyzer here 
-                    print msg
+                    print msg['data']['filepath']
 
                     pygame.mixer.init()
-                    pygame.mixer.music.load(msg['filepath'])
+                    pygame.mixer.music.load(msg['data']['filepath'])
                     pygame.mixer.music.play()
 
                     # Blocks music playback 
                     while pygame.mixer.music.get_busy(): 
                         pygame.time.Clock().tick(10)
 
-                time.sleep(5)
+                    # Finally remove it from the list
+                    self.redis_queue.poll()
+
+
             except Exception, e:
                 print 'Failed to poll message', e
     
-
+            time.sleep(5)

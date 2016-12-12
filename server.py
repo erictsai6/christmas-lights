@@ -40,8 +40,13 @@ def song_list():
         song_list = []
         if redis_messages is not None:
             song_list = [ json.loads(a)['data']['filename'] for a in redis_messages ]
+            song_list.reverse()
 
-        return jsonify(song_list)
+        song_queue = {
+            'song_list': song_list
+        }
+
+        return jsonify(**song_queue)
 
     elif request.method == 'DELETE':
         redis_queue.delete()
@@ -89,4 +94,4 @@ def upload():
         return resp
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug= True)
+    app.run(host='0.0.0.0')

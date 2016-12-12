@@ -30,7 +30,7 @@ class Queue extends React.Component {
             })
             .then((response) => {                
                 this.setState({
-                    musicQueue: response 
+                    musicQueue: response.song_list 
                 });                
             });
     }

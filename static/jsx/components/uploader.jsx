@@ -9,7 +9,9 @@ class Uploader extends React.Component {
         this.handleFileChange = this.handleFileChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
-        this.state = {};
+        this.state = {
+            isUploading: false
+        };
     }
 
     render() {
@@ -78,10 +80,10 @@ class Uploader extends React.Component {
                 method: 'POST',
                 body: data       
             })
-            .then(function(r) {
+            .then((r) => {
                 return r.json();  
             })
-            .then(function(response) {
+            .then((response) => {
                 if (response.state === 'SUCCESS') {
                     // Notify that file is uploaded
                     
@@ -89,13 +91,10 @@ class Uploader extends React.Component {
                     // Notify that file failed to upload
                     
                 }
-                
-            })
-            .finally(function() {                
                 this.setState({
                     isUploading: false
                 });
-            })
+            });            
     }
 }
 
