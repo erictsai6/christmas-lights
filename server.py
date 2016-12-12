@@ -37,7 +37,9 @@ def song_list():
     if request.method == 'GET':
         redis_messages = redis_queue.get_list()
 
-        song_list = [ json.loads(a)['data']['filename'] for a in redis_messages ]
+        song_list = []
+        if redis_messages is not None:
+            song_list = [ json.loads(a)['data']['filename'] for a in redis_messages ]
 
         return jsonify(song_list)
 
@@ -80,6 +82,11 @@ def upload():
             resp = jsonify(**error_response)
             resp.status_code = 400
             return resp
+    else:
+        error_response = {'state': 'INVALID', 'error': 'Invalid filetype'}
+        resp = jsonify(**error_response)
+        resp.status_code = 400
+        return resp
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug= True)

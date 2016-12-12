@@ -20,18 +20,12 @@ gulp.task('lint', function() {
 gulp.task('sass', function() {
     return gulp.src('static/scss/**/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('static/css'));
 });
 
-// Concatenate & Minify JS
-gulp.task('scripts', function() {
-    return gulp.src('static/app/**/*.js')
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest('dist'))
-        .pipe(rename('all.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js'));
-});
+gulp.task('build', ['sass'], shell.task([
+    './node_modules/.bin/webpack -d'
+]));
 
 gulp.task('server', shell.task([
   'python server.py'
@@ -43,11 +37,11 @@ gulp.task('redis-server', shell.task([
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('static/app/**/*.js', ['lint', 'scripts']);
+    gulp.watch('static/jsx/**/*.jsx', ['build']);
     gulp.watch('server.py', ['server']);
     gulp.watch('server/**/*.py', ['server']);
     gulp.watch('static/scss/**/*.scss', ['sass']);
 });
 
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'server', 'redis-server', 'watch']);
+gulp.task('default', ['lint', 'build', 'server', 'redis-server', 'watch']);

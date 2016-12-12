@@ -1,4 +1,3 @@
-
 import time
 import threading
 
@@ -12,12 +11,17 @@ class QueueSubscribeWorker(threading.Thread):
     def run(self):
 
         while not self.kill_received:
-            msg = self.redis_queue.poll()
-            if msg is not None:
-                
-                # Process the analyzer here 
-                print msg
+            try:
+                msg = self.redis_queue.poll()
 
-            time.sleep(5000)
+                if msg is not None:
+                    
+                    # Process the analyzer here 
+                    print msg
+                    time.sleep(60)
+
+                time.sleep(5)
+            except Exception, e:
+                print 'Failed to poll message', e
     
 

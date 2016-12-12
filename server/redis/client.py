@@ -1,9 +1,4 @@
 import json
-import datetime
-import pytz
-from random import randint
-import logging
-import time
 
 class RedisQueue():
 
