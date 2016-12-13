@@ -36,7 +36,7 @@ def show_info(aname, a):
 
 def main():
     print 'analyzer start'
-    filename = 'abc.mp3'
+    filename = 'My Shot.mp3'
 
     sound = AudioSegment.from_mp3(filename)
     sound.set_channels(1)
@@ -48,10 +48,6 @@ def main():
     data = data[:,1]
     ffts = fft_analyze(data, rate)
 
-    print len(ffts)
-    print len(ffts[0])
-    print ffts[0]
-    
 
 
     # show_info('data', data)

@@ -6,7 +6,6 @@ def fft_analyze(data, sample_rate):
     
     # Break into subarrays of 250 ms each
     subarrays = array_split(data, sample_rate / 4)
-
     ffts = []
     number_of_blocks = 32
 
@@ -19,8 +18,10 @@ def fft_analyze(data, sample_rate):
         # T = n / Fs        # The time in seconds
         # frq = k / T        
 
-        fft_subarray = abs(fft(subarray, number_of_blocks)[: 32 / 2])
-        print max(fft_subarray)
+        fft_subarray = abs(fft(subarray, number_of_blocks)[: number_of_blocks / 2])
+        for j in range(0, len(fft_subarray)):
+            fft_subarray[j] = fft_subarray[j]/len(subarray)
+
         ffts.append(fft_subarray)
 
         
