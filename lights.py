@@ -8,14 +8,6 @@ from pydub import AudioSegment
 from server.worker.light_controller import LightWorker
 from server.utility.analyzer import fft_analyze
 
-pinList = [2, 3, 4, 17, 27, 22, 10, 9]
-
-
-
-
-from server.utility.analyzer import fft_analyze 
- 
-
 def main():
     print 'analyzer start'
     filename = 'My Shot.mp3'
@@ -39,10 +31,6 @@ def main():
 
     while pygame.mixer.music.get_busy(): 
         pygame.time.Clock().tick(10)
-
-
-
-
 
 
 if __name__ == '__main__':

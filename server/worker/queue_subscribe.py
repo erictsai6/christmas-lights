@@ -2,6 +2,8 @@ import time
 import threading
 import pygame
 import json
+from scipy.io.wavfile import read,write
+from scipy import fft, arange, ifft, fftpack
 
 class QueueSubscribeWorker(threading.Thread):
     def __init__(self, x, redis_queue):
@@ -19,10 +21,14 @@ class QueueSubscribeWorker(threading.Thread):
                 if msg_list is not None and len(msg_list) > 0:
                     
                     msg = json.loads(msg_list[-1])
-
+                    rate, data = read(msg['data']['filepath'])
+                    data = data[:,1]
+                    ffts = fft_analyze(data, rate)
                     # Process the analyzer here 
                     print msg['data']['filepath']
-
+                    light_worker = LightWorker('worker 1', ffts)
+                    light_worker.daemon = True
+                    light_worker.start()
                     pygame.mixer.init()
                     pygame.mixer.music.load(msg['data']['filepath'])
                     pygame.mixer.music.play()
