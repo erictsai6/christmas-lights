@@ -39,6 +39,8 @@ class QueueSubscribeWorker(threading.Thread):
                     while pygame.mixer.music.get_busy(): 
                         pygame.time.Clock().tick(10)
 
+                    light_worker.kill_received = True
+
                     # Finally remove it from the list
                     self.redis_queue.poll()
 

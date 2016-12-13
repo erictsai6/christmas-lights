@@ -101,18 +101,21 @@ class LightWorker(threading.Thread):
 
 
     def run(self):
-        while not self.kill_received:
-            start = time.time()
-            end = time.time()
-            try:
-                i = 0
-                while i < len(self.fft):
-                    end = time.time()
-                    i = int((end - start)/.25)
-                    state = self.getState(self.fft[i]);
-                    self.color(state)
-                    time.sleep(.2);
-                    
-            except Exception, e:
-                print 'Failed to poll message', e
+        start = time.time()
+        end = time.time()
+        try:
+            i = 0
+            while i < len(self.fft) and not self.kill_received:
+                end = time.time()
+                i = int((end - start)/.25)
+                state = self.getState(self.fft[i])
+                self.color(state)
+                time.sleep(.2)
+                
+        except Exception, e:
+            print 'Unexpected error occurred', e
     
+        finally:
+
+            # Should finally clean up 
+            GPIO.cleanup()
