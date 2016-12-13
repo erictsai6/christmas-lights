@@ -4,6 +4,8 @@ import pygame
 import json
 from scipy.io.wavfile import read,write
 from scipy import fft, arange, ifft, fftpack
+from server.worker.light_controller import LightWorker
+from server.utility.analyzer import fft_analyze
 
 class QueueSubscribeWorker(threading.Thread):
     def __init__(self, x, redis_queue):
