@@ -34,6 +34,7 @@ class QueueSubscribeWorker(threading.Thread):
                     light_worker.start()
                     pygame.mixer.init()
                     pygame.mixer.music.load(msg['data']['filepath'])
+                    pygame.mixer.music.set_volume(1.0)
                     pygame.mixer.music.play()
 
                     # Blocks music playback 
