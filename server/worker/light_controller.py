@@ -116,6 +116,5 @@ class LightWorker(threading.Thread):
             print 'Unexpected error occurred', e
     
         finally:
-
-            # Should finally clean up 
-            GPIO.cleanup()
+            for i in range(0, len(self.pinList)):
+                GPIO.output(self.pinList[i], GPIO.HIGH)

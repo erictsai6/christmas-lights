@@ -6,6 +6,7 @@ from scipy.io.wavfile import read,write
 from scipy import fft, arange, ifft, fftpack
 from server.worker.light_controller import LightWorker
 from server.utility.analyzer import fft_analyze
+import RPi.GPIO as GPIO
 
 class QueueSubscribeWorker(threading.Thread):
     def __init__(self, x, redis_queue):
@@ -46,6 +47,7 @@ class QueueSubscribeWorker(threading.Thread):
 
 
             except Exception, e:
-                print 'Failed to poll message', e
-    
+                print 'Failed to poll message', e 
             time.sleep(5)
+        finally:
+            GPIO.cleanup()
