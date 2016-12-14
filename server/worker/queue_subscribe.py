@@ -48,6 +48,6 @@ class QueueSubscribeWorker(threading.Thread):
 
             except Exception, e:
                 print 'Failed to poll message', e 
-        GPIO.cleanup()
             time.sleep(5)
+        GPIO.cleanup()
 
